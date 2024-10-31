@@ -1,42 +1,142 @@
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/*- Reset -------------------------------------------------------- */
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
-html,
+/*- Body ---------------------------------------------------------- */
 body {
-  max-width: 100vw;
-  overflow-x: hidden;
-}
-
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-* {
-  box-sizing: border-box;
+  color: #000000;
+  background: #ffffff;
+  margin: 0;
   padding: 0;
+}
+
+
+/*- Overskrifter ----------------------------------------------------------------- */
+h1 {
+  font: normal 22px 'Open Sans', sans-serif;
+  color: #000000;
+  padding: 12px 0px 12px 0px;
   margin: 0;
 }
 
+/*- Paragrafer og span ----------------------------------------------------------- */
+p {
+  font: normal 16px 'Open Sans', sans-serif;
+  color: #000000;
+  padding: 12px 0px 12px 0px;
+  margin: 0;
+}
+span {
+  font: normal 16px 'Open Sans', sans-serif;
+  color: #000000;
+}
+.small {
+  font-size: 80%;
+}
+
+/*- Linker ------------------------------------------------------------------------------- */
 a {
-  color: inherit;
+  color: red;
+  font: normal 16px 'Open Sans', sans-serif;
+  text-decoration: none;
+}
+a:hover {
+  color: #e1cce4;
+  text-decoration: underline;
+}
+
+
+
+/*- Header ---------------------------------------------------------- */
+header{
+  margin: 0;
+  padding: 20px 20px 20px 20px;
+  text-align: center;
+}
+@font-face {
+  font-family: GABRWFFR;
+  src: url("fonts/GABRWFFR.TTF");
+}
+header > p{
+  margin: 0px 0px 10px 0px;
+  padding: 0;
+}
+header > p > a{
+  color: #000000;
+  font: bold 28px GABRWFFR, 'Open Sans', sans-serif;
+  letter-spacing: 10px;
+}
+header > p > a:hover{
+  color: #cdaa81;
+  font: bold 28px GABRWFFR, 'Open Sans', sans-serif;
+  letter-spacing: 11px;
+  text-decoration: none;
+}
+header > span{
+  color: #000000;
+  font: normal 16px 'Open Sans', sans-serif;
+}
+
+/*- Nav ------------------------------------------------------------- */
+nav{
+  background: #f4f4f4;
+  text-align: center; /* « The magic. */
+  margin: 0px 0px 20px 0px;
+}
+nav > ul{
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+nav > ul > li {
+  display: inline; /* « More magic. */
+}
+
+nav > ul > li > a {
+  display: inline-block; /* « Last bit of magic. */
+  padding: 10px 20px 10px 20px;
+  color: #000000;
+  font: normal 16px 'Open Sans', sans-serif;
+
+}
+nav > ul > li > a:hover {
+  color: #9a5300;
   text-decoration: none;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
+/*- Hero ------------------------------------------------------------ */
+div.hero{
+  margin: 0px auto;
+  padding: 0px 20px 0px 20px;
+  text-align: center;
+  object-fit: cover
+}
+div.hero img {
+  height: 100%;
+  width: 100%;
+}
+
+/*- Footer ------------------------------------------------------------- */
+footer{
+  background: #f4f4f4;
+  text-align: center; /* « The magic. */
+  margin: 20px 0px 0px 0px;
+}
+footer > ul{
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+footer > ul > li {
+  display: inline; /* « More magic. */
+}
+
+footer > ul > li > a {
+  display: inline-block; /* « Last bit of magic. */
+  padding: 10px 20px 10px 20px;
+  color: #000000;
+  font: normal 16px 'Open Sans', sans-serif;
+
+}
+footer > ul > li > a:hover {
+  color: #9a5300;
+  text-decoration: none;
 }
