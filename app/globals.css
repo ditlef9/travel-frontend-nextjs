@@ -1,8 +1,12 @@
 /*- Reset -------------------------------------------------------- */
 
 /*- Body ---------------------------------------------------------- */
+
+body, html {
+  min-height: 100%;
+}
 body {
-  color: #000000;
+  color: #fff;
   background: #ffffff;
   margin: 0;
   padding: 0;
@@ -11,41 +15,109 @@ body {
 
 /*- Overskrifter ----------------------------------------------------------------- */
 h1 {
-  font: normal 22px 'Open Sans', sans-serif;
-  color: #000000;
+  font: normal 22px Arial, sans-serif;
+  color: #ffff;
   padding: 12px 0px 12px 0px;
   margin: 0;
 }
 
 /*- Paragrafer og span ----------------------------------------------------------- */
 p {
-  font: normal 16px 'Open Sans', sans-serif;
-  color: #000000;
+  font: normal 16px Arial, sans-serif;
+  color: #fff;
   padding: 12px 0px 12px 0px;
   margin: 0;
 }
 span {
-  font: normal 16px 'Open Sans', sans-serif;
-  color: #000000;
+  font: normal 16px Arial, sans-serif;
+  color: #fff;
 }
 .small {
   font-size: 80%;
 }
 
-/*- Linker ------------------------------------------------------------------------------- */
+/*- Linker -------------------------------------------------------------------------------------------- */
 a {
-  color: red;
-  font: normal 16px 'Open Sans', sans-serif;
-  text-decoration: none;
-}
-a:hover {
-  color: #e1cce4;
+  color: #ffffff;
+  font: normal 16px Arial, sans-serif;
   text-decoration: underline;
 }
+a:hover {
+  color: #ffd700;
+  text-decoration: none;
+}
+
+/*- Form ----------------------------------------------------------------------------------------------- */ 
+input, select, textarea {
+  background: rgba(255, 255, 255, 0.8);
+  border: none;
+  margin: 10px 0;
+  padding: 12px;
+  border-radius: 5px;
+}
+input:hover, select:hover, textarea:hover {
+  color: #000000;
+  background: #f9f9f9;
+  text-decoration: none;
+}
+
+input[type='submit'],button {
+  padding: 10px;
+  background: #FFD700;
+  border: none;
+  color: black;
+  font-weight: bold;
+  margin-top: 10px;
+  cursor: pointer;
+  border-radius: 8px;
+}
+
+  
+input[type='submit'], button:hover, button:focus {
+  background-color: #F082AC;
+}
 
 
 
-/*- Header ---------------------------------------------------------- */
+/*- Container, background and overlay ----------------------------------------------------------------- */ 
+.container {
+  /* Full viewport height while staying responsive */
+  min-height: 100vh;
+  width: 100%; /* Use 100% instead of 100vw to prevent horizontal scroll */
+  overflow: hidden;
+
+  /* Background image settings */
+  background-image: url('/gfx/hero/background-suitcase.jpg'); /* Replace with your image path */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+
+  /* Positioning for overlay */
+  position: relative;
+}
+
+.container::after {
+  content: '';
+  position: fixed; /* Ensures overlay covers the entire viewport */
+  top: 0;
+  left: 0;
+  width: 100%; /* Use 100% to match viewport width without causing overflow */
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent overlay */
+  z-index: 1;
+}
+
+.container-content {
+  position: relative;
+  z-index: 2; /* Content goes above overlay */
+  color: #fff; /* Optional: Text color for readability */
+  padding: 20px; /* Add padding to avoid content touching edges on small screens */
+  box-sizing: border-box; /* Ensures padding doesn’t cause overflow */
+}
+
+
+/*- Header -------------------------------------------------------------------------------------------- */
 header{
   margin: 0;
   padding: 20px 20px 20px 20px;
@@ -60,63 +132,63 @@ header > p{
   padding: 0;
 }
 header > p > a{
-  color: #000000;
-  font: bold 28px GABRWFFR, 'Open Sans', sans-serif;
+  color: #fff;
+  font: bold 28px GABRWFFR, Arial, sans-serif;
   letter-spacing: 10px;
+  text-decoration: none;
 }
 header > p > a:hover{
-  color: #cdaa81;
-  font: bold 28px GABRWFFR, 'Open Sans', sans-serif;
+  color: #ffd700;
+  font: bold 28px GABRWFFR, Arial, sans-serif;
   letter-spacing: 11px;
   text-decoration: none;
 }
 header > span{
-  color: #000000;
-  font: normal 16px 'Open Sans', sans-serif;
+  color: #fff;
+  font: normal 18px Arial, sans-serif;
 }
 
-/*- Nav ------------------------------------------------------------- */
-nav{
+/*- Main ---------------------------------------------------------------------------------------------- */
+main{
   background: #f4f4f4;
-  text-align: center; /* « The magic. */
-  margin: 0px 0px 20px 0px;
-}
-nav > ul{
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-}
-nav > ul > li {
-  display: inline; /* « More magic. */
-}
+  margin: 0px auto;
+  width: 400px;
 
-nav > ul > li > a {
-  display: inline-block; /* « Last bit of magic. */
-  padding: 10px 20px 10px 20px;
-  color: #000000;
-  font: normal 16px 'Open Sans', sans-serif;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 30px;
+  border-radius: 8px;
+  backdrop-filter: blur(5px);
+
+  text-align: center;
 
 }
-nav > ul > li > a:hover {
-  color: #9a5300;
+
+
+
+/*- Tabs ---------------------------------------------------------------------------------------------- */
+.tabs {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1em;
+}
+.tabs > a {
+  background: none;
+  border: none;
+  color: white;
+  padding: 10px 10px 10px 10px;
+  margin: 0px 20px 0px 0px;
+  cursor: pointer;
+  font-weight: bold;
   text-decoration: none;
 }
-
-/*- Hero ------------------------------------------------------------ */
-div.hero{
-  margin: 0px auto;
-  padding: 0px 20px 0px 20px;
-  text-align: center;
-  object-fit: cover
-}
-div.hero img {
-  height: 100%;
-  width: 100%;
+.tabs > a:hover, .tabs > a.active {
+  border-bottom: 2px solid #FFD700;
 }
 
-/*- Footer ------------------------------------------------------------- */
+
+
+/*- Footer ---------------------------------------------------------------------------------------------- */
 footer{
-  background: #f4f4f4;
   text-align: center; /* « The magic. */
   margin: 20px 0px 0px 0px;
 }
@@ -132,11 +204,13 @@ footer > ul > li {
 footer > ul > li > a {
   display: inline-block; /* « Last bit of magic. */
   padding: 10px 20px 10px 20px;
-  color: #000000;
-  font: normal 16px 'Open Sans', sans-serif;
+  color: #ffffff;
+  opacity: 0.8;
+  font: normal 14px Arial, sans-serif;
+  text-decoration: none;
 
 }
 footer > ul > li > a:hover {
-  color: #9a5300;
+  color: #ffd700;
   text-decoration: none;
 }

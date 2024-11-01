@@ -1,10 +1,11 @@
-'use client';
+// app/(public)/layout.tsx
+
+"use client";
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
-
-export default function Home() {
+export default function PublicLayout({ children }: { children: React.ReactNode }) {
   // State to store the random background style
   const [bgStyle, setBgStyle] = useState({});
 
@@ -40,20 +41,7 @@ export default function Home() {
 
         {/* Main */}
         <main>
-            {/* Sign in/sign up */}
-            <div className="tabs">
-                <Link href="/" className="active">Sign In</Link>
-                <Link href="/sign-up">Sign Up</Link>
-            </div>
-            {/* Sign in */}
-            <div className="sign-in">
-              <form>
-                  <p><input type="email" placeholder="Email" required /></p>
-                  <p><input type="password" placeholder="Password" required /></p>
-                  <p><button type="submit">Sign In</button></p>
-                  <p><a href="#">Forgot Password?</a></p>
-              </form>
-            </div>
+          {children}
         </main>
 
 

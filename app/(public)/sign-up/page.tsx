@@ -1,7 +1,8 @@
-// app/(public)/sign-dup/page.tsx
+// app/(public)/sign-up/page.tsx
 
 "use client";
 import React, { FormEvent, useEffect, useState } from "react";
+import Link from "next/link";
 
 export default function SignUp() {
   const [email, setEmail] = useState<string>("");
@@ -87,24 +88,23 @@ export default function SignUp() {
   }
 
   return (
-    <div>
-      <form onSubmit={handleSubmit} className="flex flex-col gap-2 p-5 max-w-xs w-full bg-slate-800 rounded-lg">
-        <div className="text-center">
-          <h3 className="font-semibold">Sign Up</h3>
-        </div>
-
-        <div className="my-3">
-          <hr />
-        </div>
+    <>
+      {/* Sign in/sign up */}
+      <div className="tabs">
+          <Link href="/">Sign In</Link>
+          <Link href="/sign-up" className="active">Sign Up</Link>
+      </div>
+  
+      {/* Sign up form */}
+      <form onSubmit={handleSubmit}>
 
         {/* Error */}
         {error && <div className="error" role="alert"><span>{error}</span></div>}
 
         {/* Email Input */}
-        <div className="flex flex-col gap-2">
-          <label>Email</label>
+        <p>
           <input
-            className={`text-black p-3 border ${emailError ? 'border-red-500' : 'border-slate-700'} rounded-lg`}
+          className={`input-field ${emailError ? 'error-border' : ''}`}
             type="text"
             onChange={(e) => setEmail(e.target.value)}
             value={email}
@@ -112,14 +112,13 @@ export default function SignUp() {
             placeholder="Email"
             required
           />
-          {emailError && <div className="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50" role="alert"><span className="font-medium text-red-800">{emailError}</span></div>}
-        </div>
+        </p>
+        {emailError && <div className="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50" role="alert"><span className="font-medium text-red-800">{emailError}</span></div>}
+
 
         {/* Name Input */}
-        <div className="flex flex-col gap-2">
-          <label>Name</label>
+        <p>
           <input
-            className="text-black p-3 border border-slate-700 rounded-lg"
             type="text"
             onChange={(e) => setName(e.target.value)}
             value={name}
@@ -127,46 +126,40 @@ export default function SignUp() {
             placeholder="Name"
             required
           />
-        </div>
+        </p>
 
         {/* Password Input */}
-        <div className="flex flex-col gap-2 mt-4">
-          <label>Password<br />
-            <span className="text-sm">Your password must be at least 12 characters long, contain at least one uppercase letter, and at least one special character.</span>
-          </label>
-          <input className={`text-black p-3 border ${passwordError ? 'border-red-500' : 'border-slate-700'} rounded-lg`} type="password" onChange={(e) => setPassword(e.target.value)} value={password} id="password" placeholder="Password" required />
-          {passwordError && <div className="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50" role="alert"><span className="font-medium text-red-800">{passwordError}</span></div>}
-        </div>
+        <p>
+        
+        <input
+          className={`input-field ${passwordError ? 'error-border' : ''}`}
+          type="password"
+          onChange={(e) => setPassword(e.target.value)}
+          value={password}
+          id="password"
+          placeholder="Password"
+          required
+        />
+        </p>
+        {passwordError && <div className="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50" role="alert"><span className="font-medium text-red-800">{passwordError}</span></div>}
+        
 
-        {/* Confirm Password Input */}
-        <div className="flex flex-col gap-2">
-          <label>Confirm Password</label>
-          <input
-            className={`text-black p-3 border ${confirmPasswordError ? 'border-red-500' : 'border-slate-700'} rounded-lg`}
-            type="password"
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            value={confirmPassword}
-            id="confirm-password"
-            placeholder="Confirm Password"
-            required
-          />
-          {confirmPasswordError && <div className="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50" role="alert"><span className="font-medium text-red-800">{confirmPasswordError}</span></div>}
-        </div>
 
         {/* Terms of Service and Privacy Policy */}
-        <div className="flex flex-col gap-2 mt-4">
-          <label>
-            <input type="checkbox" checked={agreeToTerms} onChange={(e) => setAgreeToTerms(e.target.checked)} />
-            &nbsp;I agree to the <a href="/terms-of-service" target="_blank" rel="noopener noreferrer" className="text-blue-500">terms of service</a>.
-          </label>
-          <label>
-            <input type="checkbox" checked={agreeToPrivacy} onChange={(e) => setAgreeToPrivacy(e.target.checked)} />
-            &nbsp;I agree to the <a href="/privacy-policy" target="_blank" rel="noopener noreferrer" className="text-blue-500">privacy policy</a>.
-          </label>
-        </div>
+        <p>
+        <input type="checkbox" checked={agreeToTerms} onChange={(e) => setAgreeToTerms(e.target.checked)} />
+        &nbsp;I agree to the <a href="/terms-of-service" target="_blank" rel="noopener noreferrer" className="text-blue-500">terms of service</a>.
+        </p>
+
+        <p>
+        <input type="checkbox" checked={agreeToPrivacy} onChange={(e) => setAgreeToPrivacy(e.target.checked)} />
+        &nbsp;I agree to the <a href="/privacy-policy" target="_blank" rel="noopener noreferrer" className="text-blue-500">privacy policy</a>.
+        </p>
 
         <button type="submit" className="mt-4 bg-slate-900 text-white p-3 rounded-lg">Sign Up</button>
       </form>
-    </div>
+
+          
+    </>
   );
 }
