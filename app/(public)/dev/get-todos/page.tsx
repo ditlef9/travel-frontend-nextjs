@@ -21,8 +21,7 @@ export default function GetTodos() {
       const res = await fetch(`http://localhost:8080/users/${username}/todos`, {
         method: "GET",
         headers: {
-          "Origin": "http://localhost:3000",
-          "Access-Control-Allow-Origin":  "http://localhost:3000"
+          "Origin": "http://localhost:3000"
         },
       });
 

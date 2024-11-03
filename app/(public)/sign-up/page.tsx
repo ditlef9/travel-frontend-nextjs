@@ -13,44 +13,48 @@ export default function SignUp() {
   const [agreeToTerms, setAgreeToTerms] = useState<boolean>(false);
   const [agreeToPrivacy, setAgreeToPrivacy] = useState<boolean>(false);
 
-  const [error, setError] = useState<string>(""); // main error message
+  const [feedbackType, setFeedbackType] = useState<string | undefined>(undefined);
+  const [feedbackMessage, setFeedbackMessage] = useState<string | undefined>(undefined);
   const [emailError, setEmailError] = useState<string>("");
   const [passwordError, setPasswordError] = useState<string>("");
-  const [confirmPasswordError, setConfirmPasswordError] = useState<string>("");
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
     
     // Reset errors
-    setError("");
+    setFeedbackType("info");
+    setFeedbackMessage("Loading...");
     setEmailError("");
     setPasswordError("");
-    setConfirmPasswordError("");
-
+  
     if (!agreeToTerms) {
-      setError("You must agree to the terms of service.");
+      setFeedbackType("error");
+      setFeedbackMessage("You must agree to the terms of service.");
       return;
     }
-
+  
     if (!agreeToPrivacy) {
-      setError("You must agree to the privacy policy.");
+      setFeedbackType("error");
+      setFeedbackMessage("You must agree to the privacy policy.");
       return;
     }
-
+  
     // Email validation regex
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
+      setFeedbackType("error");
+      setFeedbackMessage("Email error.");
       setEmailError("Please enter a valid email address.");
       return;
     }
-
+  
     // Password validation regex
-    const passwordRegex = /^(?=.*[A-Z])(?=.*[!@#$%^&*.])(?=.{12,})/; // Include . in the regex
+    const passwordRegex = /^(?=.*[A-Z])(?=.*[!@#$%^&*.])(?=.{12,})/; 
     if (!passwordRegex.test(password)) {
       const passwordLen = password.length;
       const hasUppercase = /[A-Z]/.test(password);
       const hasSpecialChar = /[!@#$%^&*.]/.test(password);
-
+  
       let errorMessage = `Your password must be at least 12 characters long. Currently, it has ${passwordLen} characters.`;
       if (!hasUppercase) {
         errorMessage += " It should also contain at least one uppercase letter.";
@@ -58,34 +62,49 @@ export default function SignUp() {
       if (!hasSpecialChar) {
         errorMessage += " Additionally, it must include at least one special character (e.g., !, @, #, $, %, ^, &, *, .).";
       }
-
+  
+      setFeedbackType("error");
+      setFeedbackMessage("Password error.");
       setPasswordError(errorMessage);
       return;
     }
+  
 
-    if (password !== confirmPassword) {
-      setConfirmPasswordError("The passwords you entered do not match. Please try again.");
-      return;
-    }
+    // Print the JSON payload to the console
+    // Create the payload
+    const payload = {
+      email: email,
+      name: name,
+      password: password,
+    };
+    console.log("SignUpPage()::handleSubmit()::Sending JSON:", JSON.stringify(payload, null, 2)); // Pretty print the JSON
 
-    const res = await fetch("http://localhost:8080/sign-up", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({ email, password, name }),
-    });
-
-    if (res.ok) {
-      window.location.href = "/";
-    } else {
-      const errorResponse = await res.json();
-      const errorMessage = errorResponse.error === "email already exists" 
-        ? "This email is already registered. Please use a different email address or log in."
-        : "An error occurred during sign up. Please try again later.";
-      setError(errorMessage);
+    
+    try {
+      const res = await fetch("http://localhost:8080/api/users/sign-up", {
+        method: "POST",
+        headers: {
+          "Origin": "http://localhost:3000",
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload),
+      });
+  
+      if (res.ok) {
+        setFeedbackType("success");
+        setFeedbackMessage("Welcome, " + name);
+        window.location.href = "/";
+      } else {
+        const errorResponse = await res.json();
+        setFeedbackType("error");
+        setFeedbackMessage(errorResponse.message || "An error occurred during sign-up.");
+      }
+    } catch (error) {
+      setFeedbackType("error");
+      setFeedbackMessage("An error occurred: " + (error instanceof Error ? error.message : "Unknown error"));
     }
   }
+  
 
   return (
     <>
@@ -99,7 +118,11 @@ export default function SignUp() {
       <form onSubmit={handleSubmit}>
 
         {/* Error */}
-        {error && <div className="error" role="alert"><span>{error}</span></div>}
+        {feedbackMessage && (
+          <div className={feedbackType}>
+            <span>{feedbackMessage}</span>
+          </div>
+        )}
 
         {/* Email Input */}
         <p>
@@ -113,7 +136,7 @@ export default function SignUp() {
             required
           />
         </p>
-        {emailError && <div className="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50" role="alert"><span className="font-medium text-red-800">{emailError}</span></div>}
+        {emailError && <div className="error_small"><span>{emailError}</span></div>}
 
 
         {/* Name Input */}
@@ -141,7 +164,7 @@ export default function SignUp() {
           required
         />
         </p>
-        {passwordError && <div className="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50" role="alert"><span className="font-medium text-red-800">{passwordError}</span></div>}
+        {passwordError && <div className="error_small"><span>{passwordError}</span></div>}
         
 
 
@@ -156,7 +179,7 @@ export default function SignUp() {
         &nbsp;I agree to the <a href="/privacy-policy" target="_blank" rel="noopener noreferrer" className="text-blue-500">privacy policy</a>.
         </p>
 
-        <button type="submit" className="mt-4 bg-slate-900 text-white p-3 rounded-lg">Sign Up</button>
+        <button type="submit">Sign Up</button>
       </form>
 
           
