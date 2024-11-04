@@ -42,12 +42,14 @@ export const authConfig: NextAuthOptions = {
           const data = await res.json(); // Assuming the response contains the token
           const token = data.token; // Adjust this to match your API's response structure
           const userId = data.userId; // Adjust as necessary to obtain the user id
+          const name  = data.name;
       
           // Type assertion here
           return {
             id: userId,  // Ensure you have a user id
             email: credentials.email,
             token, // Include the token
+            name,
           } as unknown as User; // Cast it as unknown first, then to User
       
         } catch (error) {
@@ -63,6 +65,7 @@ export const authConfig: NextAuthOptions = {
       if (session?.user && token) {
         session.user.email = token.email;
         session.user.token = token.token; // Add the token to the session
+        session.user.name = token.name; // Add name to the session
       }
       return session;
     },
@@ -71,6 +74,7 @@ export const authConfig: NextAuthOptions = {
       if (user) {
         token.email = user.email;
         token.token = user.token; // Save the token in the JWT
+        token.name = user.name; // Add name to the token
       }
       return token;
     },
