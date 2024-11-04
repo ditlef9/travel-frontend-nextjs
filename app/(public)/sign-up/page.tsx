@@ -77,7 +77,7 @@ export default function SignUp() {
       name: name,
       password: password,
     };
-    console.log("SignUpPage()::handleSubmit()::Sending JSON:", JSON.stringify(payload, null, 2)); // Pretty print the JSON
+    // console.log("SignUpPage()::handleSubmit()::Sending JSON:", JSON.stringify(payload, null, 2)); // Pretty print the JSON
 
     
     try {

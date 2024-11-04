@@ -1,4 +1,4 @@
-/*- Reset -------------------------------------------------------- */
+/* app/globals.css */
 
 /*- Body ---------------------------------------------------------- */
 
@@ -147,6 +147,51 @@ header > span{
   color: #fff;
   font: normal 18px Arial, sans-serif;
 }
+
+
+
+/*- Nav ------------------------------------------------------------------------------------------------ */
+/* Nav Styles */
+.navbar {
+  padding: 10px;
+  margin: 0;
+  display: flex;
+  justify-content: center; /* Center the navbar content */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+.navbar ul {
+  list-style: none; /* Remove bullets */
+  padding: 0; /* Remove padding */
+  display: flex; /* Align items horizontally */
+}
+
+.navbar li {
+  margin: 0 20px; /* Space between items */
+}
+
+.nav-item {
+  display: flex; /* Use flex to stack items vertically */
+  flex-direction: column; /* Stack icon and text vertically */
+  align-items: center; /* Center align items */
+  text-align: center; /* Center text */
+  border-radius: 5px; /* Make the background round */
+  padding: 10px;
+}
+
+.nav-item:hover {
+  background: rgba(255, 255, 255, 0.2); /* Change the background color on hover */
+}
+.navbar > ul > li > a{
+  text-decoration: none; /* Underline on hover */
+}
+
+.navbar > ul > li > a > div > span{
+  text-decoration: none; /* Underline on hover */
+  font-size: 110%;
+}
+
+
 
 /*- Main ---------------------------------------------------------------------------------------------- */
 main{

@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { CredentialsForm } from "./(public)/sign-in/components/credentialsForm";
 
 
 export default function Home() {
@@ -47,12 +48,10 @@ export default function Home() {
             </div>
             {/* Sign in */}
             <div className="sign-in">
-              <form>
-                  <p><input type="email" placeholder="Email" required /></p>
-                  <p><input type="password" placeholder="Password" required /></p>
-                  <p><button type="submit">Sign In</button></p>
-                  <p><a href="#">Forgot Password?</a></p>
-              </form>
+              
+              {/* Sign-In Form */}
+              <CredentialsForm />
+
             </div>
         </main>
 
