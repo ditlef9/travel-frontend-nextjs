@@ -1,4 +1,4 @@
-interface VisitedPlacesI {
+interface VisitedDestinationI {
     id: number;
     name: string;
   }

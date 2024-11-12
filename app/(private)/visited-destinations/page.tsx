@@ -4,10 +4,7 @@
 import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react"; // Import useSession
 
-interface VisitedDestination {
-  id: number;
-  name: string;
-}
+
 
 export default function DestinationsPage() {
   // Session
@@ -16,9 +13,9 @@ export default function DestinationsPage() {
     return <p>You must be logged in to view this page.</p>;
   }
 
-  const [visitedDestinations, setVisitedDestinations] = useState<VisitedDestination[]>([]);
+  const [visitedDestinations, setVisitedDestinations] = useState<VisitedDestinationI[]>([]);
   const [newDestination, setNewDestination] = useState("");
-  const [editingDestination, setEditingDestination] = useState<VisitedDestination | null>(null);
+  const [editingDestination, setEditingDestination] = useState<VisitedDestinationI | null>(null);
   const [loading, setLoading] = useState(false);
 
   // Fetch visited destinations when the component mounts
