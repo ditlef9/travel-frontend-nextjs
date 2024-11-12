@@ -1,6 +1,13 @@
 // app/lib/auth.ts
 import { NextAuthOptions, User } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
+import jwt, { JwtPayload } from "jsonwebtoken"; // Import the jsonwebtoken package
+
+interface DecodedToken extends JwtPayload {
+  userId: string;
+  name: string;
+  email: string;
+}
 
 export const authConfig: NextAuthOptions = {
   providers: [
@@ -24,26 +31,35 @@ export const authConfig: NextAuthOptions = {
         };
       
         try {
-          const res = await fetch("http://localhost:8080/api/users/sign-in", {
+          const res = await fetch("http://localhost:8080/api/sign-in", {
             method: "POST",
             headers: {
-              "Origin": "http://localhost:3000",
               "Content-Type": "application/json",
             },
             body: JSON.stringify(payload),
           });
       
           if (!res.ok) {
-            const errorResponse = await res.json();
-            console.log(`Error response: ${errorResponse.message}`);
+            
+            try {
+              const errorResponse = await res.json();
+              console.log(`auth.authorize()::Error response: ${errorResponse.message}`);
+            } catch (e) {
+              console.log(`auth.authorize()::Error while parsing error response: ${e}`);
+            }
             return null; // Return null if the response is not ok
           }
       
           const data = await res.json(); // Assuming the response contains the token
           const token = data.token; // Adjust this to match your API's response structure
-          const userId = data.userId; // Adjust as necessary to obtain the user id
-          const name  = data.name;
-      
+
+
+          // userId, name, email is part of the payload of the token
+          const decodedToken = jwt.decode(token) as DecodedToken; // Type assertion
+          const userId = decodedToken.userId; // Access the userId from the decoded token
+          const name = decodedToken.name;     // Access the name from the decoded token
+          console.log("auth.authorize()::Decoded Token:", decodedToken); // Debug the decoded token
+
           // Type assertion here
           return {
             id: userId,  // Ensure you have a user id

@@ -20,6 +20,8 @@ export default function SignUp() {
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
+    console.log("SignUpPage()::handleSubmit():Starting!");
+
     
     // Reset errors
     setFeedbackType("info");
@@ -77,15 +79,14 @@ export default function SignUp() {
       name: name,
       password: password,
     };
-    // console.log("SignUpPage()::handleSubmit()::Sending JSON:", JSON.stringify(payload, null, 2)); // Pretty print the JSON
+    console.log("SignUpPage()::handleSubmit()::Sending JSON:", JSON.stringify(payload, null, 2)); // Pretty print the JSON
 
     
     try {
-      const res = await fetch("http://localhost:8080/api/users/sign-up", {
+      const res = await fetch("http://localhost:8080/api/sign-up", {
         method: "POST",
         headers: {
-          "Origin": "http://localhost:3000",
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(payload),
       });

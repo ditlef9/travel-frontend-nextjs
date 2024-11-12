@@ -11,10 +11,10 @@ export default function Header() {
   return (
     <header style={{ paddingBottom: 0, marginBottom: 0 }}>
       <p style={{ padding: 0, margin: 0 }}>
-        <Link href="/dashboard">Smart Travel App</Link>
+        <Link href="/suggestions">Smart Travel App</Link>
       </p>
       {/* Display user email or a placeholder if the user is not authenticated */}
-      <span style={{ fontWeight: 'bold', color: '#FFD700' }}>
+      <span>
         {session?.user?.name || "Guest"} {/* Use optional chaining to avoid undefined errors */}
       </span>
     </header>

@@ -25,7 +25,7 @@ export function CredentialsForm(props: CredentialsFormProps) {
     });
   
     if (signInResponse && !signInResponse.error) {
-      router.push("/dashboard");
+      router.push("/suggestions");
     } else {
       if (signInResponse?.error) {
         if (signInResponse.error === "User not authenticated") {
