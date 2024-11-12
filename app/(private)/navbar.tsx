@@ -35,10 +35,10 @@ export default function Navbar() {
           </Link>
         </li>
         <li>
-          <Link href="/visited-places">
+          <Link href="/visited-destinations">
             <div className="nav-item">
               <Image src={pin_drop_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24} alt="Locations" width={24} height={24} />
-              <span>Visited Places</span>
+              <span>Visited Destinations</span>
             </div>
           </Link>
         </li>
